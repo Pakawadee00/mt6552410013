@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazing Thailand - 1 ภาค 1 จังหวัด ไม่ไปไม่รู้</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1E3A8A',
+                        secondary: '#D97706',
+                        accent: '#059669'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Font (Prompt) -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Prompt', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header / Hero Section -->
+    <header class="relative bg-gradient-to-r from-primary via-blue-800 to-indigo-900 text-white py-20 px-4 shadow-lg">
+        <div class="max-w-6xl mx-auto text-center">
+            <span class="bg-secondary text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">Midterm Project 2569</span>
+            <h1 class="text-4xl md:text-6xl font-bold mt-4 mb-4 tracking-tight">Amazing Thailand</h1>
+            <p class="text-xl md:text-2xl text-blue-200 font-light mb-8">"1 ภาค 1 จังหวัด ไม่ไปไม่รู้"</p>
+            <a href="#explore" class="bg-secondary hover:bg-amber-600 text-white font-medium px-8 py-3 rounded-full shadow-md transition duration-300">เริ่มสำรวจเลย</a>
+        </div>
+    </header>
+
+    <!-- Main Navigation / Region Tabs -->
+    <main id="explore" class="max-w-6xl mx-auto px-4 py-12">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">เลือกภูมิภาคที่คุณสนใจ</h2>
+            <p class="text-gray-600">คลิกเลือกภาคเพื่อดูข้อมูลจังหวัดไฮไลต์ แหล่งท่องเที่ยว ที่กิน และที่พัก</p>
+        </div>
+
+        <!-- Region Buttons -->
+        <div class="flex flex-wrap justify-center gap-3 mb-10" id="region-tabs">
+            <button onclick="switchRegion('north')" class="region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-primary text-white shadow" data-target="north">ภาคเหนือ</button>
+            <button onclick="switchRegion('northeast')" class="region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm" data-target="northeast">ภาคตะวันออกเฉียงเหนือ</button>
+            <button onclick="switchRegion('central')" class="region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm" data-target="central">ภาคกลาง</button>
+            <button onclick="switchRegion('east')" class="region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm" data-target="east">ภาคตะวันออก</button>
+            <button onclick="switchRegion('west')" class="region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm" data-target="west">ภาคตะวันตก</button>
+            <button onclick="switchRegion('south')" class="region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm" data-target="south">ภาคใต้</button>
+        </div>
+
+        <!-- Content Display Area -->
+        <div id="content-container" class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 transition-all duration-500">
+            <!-- Content will be injected via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8 text-center mt-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="font-medium">Web Development Midterm Project 2569</p>
+            <p class="text-sm text-gray-400 mt-1">จัดทำขึ้นเพื่อการศึกษา HTML, CSS, JavaScript และ TailwindCSS</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data and Logic -->
+    <script>
+        const regionsData = {
+            north: {
+                province: "เชียงใหม่ (Chiang Mai)",
+                tagline: "ดินแดนล้านนา วัฒนธรรมทรงคุณค่า ธรรมชาติขุนเขาโอบล้อม",
+                image: "https://images.unsplash.com/photo-1513415536418-30fed52443d3?auto=format&fit=crop&w=1200&q=80",
+                desc: "เชียงใหม่เป็นเมืองท่องเที่ยวอันดับต้นๆ ที่ผสมผสานระหว่างความเจริญทางเมืองและวัฒนธรรมล้านนาโบราณได้อย่างลงตัว มีอากาศเย็นสบายตลอดปีและภูเขาสูงตระหง่าน",
+                attractions: [
+                    { name: "วัดพระธาตุดอยสุเทพราชวรวิหาร", desc: "ปูชนียสถานคู่เมืองเชียงใหม่ที่ต้องมาสักการะ ชมวิวเมืองเชียงใหม่แบบพาโนรามา" },
+                    { name: "ถนนนิมมานเหมินท์", desc: "แหล่งรวมคาเฟ่สุดชิค งานศิลปะ และไลฟ์สไตล์คนรุ่นใหม่" },
+                    { name: "กิ่วแม่ปาน อุทยานแห่งชาติดอยอินทนนท์", desc: "เส้นทางศึกษาธรรมชาติยอดฮิตสัมผัสทะเลหมอกและอากาศหนาวเย็น" }
+                ],
+                foods: [
+                    { name: "ข้าวซอยไก่", desc: "บะหมี่ในน้ำแกงกะหรี่สูตรเข้มข้น เสิร์ฟพร้อมเครื่องเคียงหอมแดง ผักดอง และมะนาว" },
+                    { name: "ขนมจีนน้ำเงี้ยว", desc: "รสชาติจัดจ้าน หอมดอกเงี้ยวและถั่วเน่า เอกลักษณ์อาหารเหนือ" },
+                    { name: "ลาบหมูคั่ว", desc: "ลาบเหนือรสเผ็ดร้อน หอมสมุนไพรและเครื่องเทศคั่วสดใหม่" }
+                ],
+                hotels: [
+                    { name: "Rachamankha Hotel", desc: "โรงแรมสไตล์บูติกบูทัศนียภาพล้านนาโบราณใจกลางเมืองเก่า" },
+                    { name: "Monjam Camping Resorts", desc: "ที่พักท่ามกลางธรรมชาติบนม่อนแจ่ม ชมหมอกยามเช้าแบบฟินๆ" }
+                ]
+            },
+            northeast: {
+                province: "ขอนแก่น (Khon Kaen)",
+                tagline: "ศูนย์กลางอีสาน สมาร์ทซิตี้ ผ้าไหมมัดหมี่ขึ้นชื่อ",
+                image: "https://images.unsplash.com/photo-1596401057630-365a5fe94f57?auto=format&fit=crop&w=1200&q=80",
+                desc: "ขอนแก่นคือมหานครแห่งภาคอีสานที่มีความเจริญก้าวหน้า มีบึงแก่นนครและบึงหนองทับكنแหล่งพักผ่อนหย่อนใจ และวัฒนธรรมหมอลำอีสานที่สนุกสนาน",
+                attractions: [
+                    { name: "พระธาตุหนองบางแลง", desc: "พระธาตุสีทองอร่ามงดงามริมบึงแก่นนคร ศูนย์รวมจิตใจชาวขอนแก่น" },
+                    { name: "อุทยานแห่งชาติภูผาม่าน", desc: "ชมธรรมชาติ ป่าเขา หน้าผาสูง และจุดชมค้างคาวบินออกจากถ้ำยามเย็น" },
+                    { name: "ถนนต้นตาล", desc: "คอมมูนิตี้มอลล์สุดชิคที่มีดนตรีสดและอาหารอร่อยมากมาย" }
+                ],
+                foods: [
+                    { name: "ส้มตำแซ่บอีสาน", desc: "ส้มตำรสจัดจานปลาร้าหอมนัว เครื่องเคียงครบครัน" },
+                    { name: "ไส้กรอกอีสาน", desc: "เปรี้ยวกำลังดี ย่างเตาถ่านหอมกรุ่นกินกับพริกขี้หนูสวน" },
+                    { name: "ต้มแซ่บกระดูกอ่อน", desc: "ซุปร้อนๆ รสเปรี้ยวเผ็ดสะใจสไตล์อีสาน" }
+                ],
+                hotels: [
+                    { name: "Pullman Khon Kaen Raja Orchid", desc: "โรงแรมหรูระดับ 5 ดาวใจกลางเมือง สะดวกสบายครบครัน" },
+                    { name: "Ad Lib Khon Kaen", desc: "โรงแรมดีไซน์โมเดิร์นลอฟท์ ถ่ายรูปสวยทุกมุม" }
+                ]
+            },
+            central: {
+                province: "พระนครศรีอยุธยา (Ayutthaya)",
+                tagline: "มรดกโลกทางวัฒนธรรม รุ่งเรืองอดีตราชธานีไทย",
+                image: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&w=1200&q=80",
+                desc: "เมืองเก่าที่มีคุณค่าทางประวัติศาสตร์ เต็มไปด้วยวัดโบราณ พระปรางค์ และซากโบราณสถานอันงดงามริมแม่น้ำเจ้าพระยา",
+                attractions: [
+                    { name: "วัดมหาธาตุ", desc: "ชมเศียรพระพุทธรูปในรากไม้ที่เป็นสัญลักษณ์ระดับโลก" },
+                    { name: "วัดไชยวัฒนาราม", desc: "สถาปัตยกรรมขอมโบราณริมน้ำ งดงามยามพระอาทิตย์ตก" },
+                    { name: "ตลาดน้ำ 3 G", desc: "สัมผัสวิถีชีวิตไทยโบราณ ชิมอาหารอร่อยริมน้ำ" }
+                ],
+                foods: [
+                    { name: "โรตีสายไหม", desc: "ของฝากขึ้นชื่อแป้งนุ่มห่อไส้น้ำตาลเคี่ยวหวานหอม" },
+                    { name: "กุ้งเผาอยุธยา", desc: "กุ้งแม่น้ำตัวโตเนื้อแน่น มันกุ้งเยิ้มๆ จิ้มน้ำจิ้มซีฟู้ดแซ่บ" },
+                    { name: "ก๋วยเตี๋ยวเรืออยุธยา", desc: "น้ำซุปเข้มข้นรสชาติจัดจ้านสูตรดั้งเดิม" }
+                ],
+                hotels: [
+                    { name: "Sala Ayutthaya", desc: "บูติกโรงแรมริมน้ำวิววัดพุทไธสวรรย์ ดีไซน์โมเดิร์นคลาสสิก" },
+                    { name: "Classic Kameo Hotel Ayutthaya", desc: "ที่พักบริการเยี่ยมยอด สิ่งอำนวยความสะดวกครบครัน" }
+                ]
+            },
+            east: {
+                province: "ชลบุรี (Chonburi)",
+                tagline: "ทะเลสวย ใกล้กรุง เกาะสวรรค์ แหล่งอาหารทะเลสด",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+                desc: "จังหวัดท่องเที่ยวยอดฮิตริมชายฝั่งตะวันออก มีทั้งพัทยา เกาะล้าน และหาดบางแสน ตอบโจทย์ทั้งสายเที่ยวทะเลและสายคาเฟ่",
+                attractions: [
+                    { name: "หาดตาแหวน เกาะล้าน", desc: "น้ำทะเลใสสะอาด หาดทรายขาวละเอียด เหมาะกับการเล่นน้ำและดำน้ำ" },
+                    { name: "ปราสาทสัจธรรม", desc: "สถาปัตยกรรมไม้แกะสลักที่ใหญ่ที่สุดในโลกริมทะเลพัทยา" },
+                    { name: "เขาสามมุข บางแสน", desc: "จุดชมวิวทะเลมุมสูงและจุดถ่ายรูปพระอาทิตย์ตกยอดนิยม" }
+                ],
+                foods: [
+                    { name: "อาหารทะเลสดๆ (ซีฟู้ด)", desc: "กุ้ง หอย ปู ปลา เผานึ่งสดๆ พร้อมน้ำจิ้มแซ่บ" },
+                    { name: "ข้าวหลามหนมนอง", desc: "ข้าวหลามสูตรโบราณหอมมันกะทิถั่วดำ" },
+                    { name: "หอยทอด/ออส่วน บางแสน", desc: "แป้งกรอบนอกนุ่มใน หอยนางรมสดหวานเต็มคำ" }
+                ],
+                hotels: [
+                    { name: "Centara Grand Mirage Beach Resort Pattaya", desc: "รีสอร์ทธีมสวนน้ำระดับโลกติดหาดวงศ์อมาตย์" },
+                    { name: "The Tide Resort Bangsaen", desc: "ที่พักบรรยากาศดีใกล้หาดบางแสน เดินทางสะดวก" }
+                ]
+            },
+            west: {
+                province: "กาญจนบุรี (Kanchanaburi)",
+                tagline: "ธรรมชาติขุนเขา น้ำตกใส ประวัติศาสตร์สะพานข้ามแม่น้ำแคว",
+                image: "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1200&q=80",
+                desc: "เมืองหน้าด่านตะวันตกที่มีธรรมชาติอุดมสมบูรณ์ แม่น้ำสายสำคัญ และประวัติศาสตร์สงครามโลกครั้งที่ 2 อันเลื่องชื่อ",
+                attractions: [
+                    { name: "สะพานข้ามแม่น้ำแคว", desc: "แลนด์มาร์กประวัติศาสตร์สำคัญทางรถไฟสายมรณะ" },
+                    { name: "น้ำตกเอราวัณ", desc: "น้ำตก 7 ชั้นที่มีน้ำสีมรกตใสสะอาดน่าเล่นที่สุดในไทย" },
+                    { name: "ทางรถไฟสายมรณะ (ถ้ำกระแซ)", desc: "นั่งรถไฟชมวิวเลียบหน้าผาสูงชันเหนือแม่น้ำแควใหญ่" }
+                ],
+                foods: [
+                    { name: "แกงป่าปลาคราฟ/ปลาแม่น้ำ", desc: "แกงป่ารสจัดจ้านหอมสมุนไพรป่าแท้ๆ" },
+                    { name: "ปลาทอดสมุนไพร", desc: "ปลาสดจากเขื่อนทอดกรอบเสิร์ฟพร้อมเครื่องเคียงสมุนไพรแน่นๆ" },
+                    { name: "ยำผักกูด", desc: "ผักกูดสดกรอบลวกสุกยำรสชาติกลมกล่อม" }
+                ],
+                hotels: [
+                    { name: "The FloatHouse River Kwai", desc: "รีสอร์ทแพริมน้ำล้อมรอบด้วยป่าเขียวขจีสุดสงบ" },
+                    { name: "U Inchantree Kanchanaburi", desc: "บูติกโฮเต็ลริมแม่น้ำแคว บรรยากาศร่มรื่นอบอุ่น" }
+                ]
+            },
+            south: {
+                province: "ภูเก็ต (Phuket)",
+                tagline: "ไข่มุกอันดามัน หาดทรายขาว น้ำใส วัฒนธรรมเพอรากัน",
+                image: "https://images.unsplash.com/photo-1589394815804-964ed0be2eb5?auto=format&fit=crop&w=1200&q=80",
+                desc: "เกาะสวรรค์ภาคใต้ที่มีชื่อเสียงระดับโลก ทะเลสีครามสวรรค์ของนักดำน้ำ และสถาปัตยกรรมชิโนโปรตุกีสอันเป็นเอกลักษณ์",
+                attractions: [
+                    { name: "ย่านเมืองเก่าภูเก็ต (Phuket Old Town)", desc: "ชมตึกชิโนโปรตุกีสสีสันสดใสและสตรีทอาร์ตสุดเก๋" },
+                    { name: "แหลมพรหมเทพ", desc: "จุดชมวิวพระอาทิตย์ตกดินที่สวยงามและโรแมนติกที่สุดในไทย" },
+                    { name: "เกาะราชา / เกาะเฮ", desc: "เกาะน้ำใส หาดทรายขาว เหมาะกับการดำน้ำดูปะการัง" }
+                ],
+                foods: [
+                    { name: "หมูฮ้อง", desc: "หมูสามชั้นตุ๋นซีอิ๊วเครื่องเทศรสชาติเข้มข้นละลายในปาก" },
+                    { name: "โอต้าว", desc: "หอยนางรมตัวเล็กผัดกับแป้ง ไข่ และเผือก ใส่กากหมูกรอบๆ" },
+                    { name: "ขนมจีนภูเก็ต", desc: "ทานคู่กับน้ำยาปูเข้มข้นและผักสดพื้นบ้านนานาชนิด" }
+                ],
+                hotels: [
+                    { name: "The Slate Phuket", desc: "รีสอร์ทดีไซน์ลักชูรีสไตล์อุตสาหกรรมแร่ดีบุกหาดยางใหญ่" },
+                    { name: "Patong Bay Hill Resort", desc: "ที่พักวิวทะเลมุมสูงพานอรามาหาดป่าตอง" }
+                ]
+            }
+        };
+
+        function switchRegion(regionKey) {
+            // Update button styles
+            document.querySelectorAll('.region-btn').forEach(btn => {
+                if(btn.getAttribute('data-target') === regionKey) {
+                    btn.className = "region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-primary text-white shadow";
+                } else {
+                    btn.className = "region-btn px-5 py-2.5 rounded-full font-medium transition duration-300 bg-white text-gray-700 hover:bg-gray-100 border border-gray-200 shadow-sm";
+                }
+            });
+
+            const data = regionsData[regionKey];
+            const container = document.getElementById('content-container');
+
+            container.innerHTML = `
+                <div class="relative h-72 md:h-96 w-full overflow-hidden">
+                    <img src="${data.image}" alt="${data.province}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end p-6 md:p-10 text-white">
+                        <span class="bg-secondary text-xs uppercase font-bold px-3 py-1 rounded-full w-max mb-2">จังหวัดไฮไลต์</span>
+                        <h3 class="text-3xl md:text-5xl font-bold">${data.province}</h3>
+                        <p class="text-lg md:text-xl text-gray-200 mt-1">${data.tagline}</p>
+                    </div>
+                </div>
+                <div class="p-6 md:p-10 space-y-8">
+                    <!-- Basic Info -->
+                    <div>
+                        <h4 class="text-xl font-bold text-primary mb-2 border-l-4 border-secondary pl-3">ข้อมูลเบื้องต้นของจังหวัด</h4>
+                        <p class="text-gray-700 leading-relaxed">${data.desc}</p>
+                    </div>
+
+                    <!-- Grid Layout for Attractions, Food, and Hotels -->
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <!-- Attractions -->
+                        <div class="bg-gray-50 p-5 rounded-xl border border-gray-200 shadow-sm">
+                            <h5 class="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+                                <span class="text-secondary">📍</span> สถานที่ท่องเที่ยวแนะนำ
+                            </h5>
+                            <ul class="space-y-4">
+                                ${data.attractions.map(item => `
+                                    <li class="border-b border-gray-200 pb-3 last:border-0">
+                                        <strong class="text-primary block">${item.name}</strong>
+                                        <span class="text-sm text-gray-600">${item.desc}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <!-- Food -->
+                        <div class="bg-gray-50 p-5 rounded-xl border border-gray-200 shadow-sm">
+                            <h5 class="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+                                <span class="text-secondary">🍜</span> ของกินขึ้นชื่อ
+                            </h5>
+                            <ul class="space-y-4">
+                                ${data.foods.map(item => `
+                                    <li class="border-b border-gray-200 pb-3 last:border-0">
+                                        <strong class="text-primary block">${item.name}</strong>
+                                        <span class="text-sm text-gray-600">${item.desc}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <!-- Hotels -->
+                        <div class="bg-gray-50 p-5 rounded-xl border border-gray-200 shadow-sm">
+                            <h5 class="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+                                <span class="text-secondary">🏨</span> ที่พักแนะนำ
+                            </h5>
+                            <ul class="space-y-4">
+                                ${data.hotels.map(item => `
+                                    <li class="border-b border-gray-200 pb-3 last:border-0">
+                                        <strong class="text-primary block">${item.name}</strong>
+                                        <span class="text-sm text-gray-600">${item.desc}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize with North region on load
+        window.onload = () => {
+            switchRegion('north');
+        };
+    </script>
+</body>
+</html>
